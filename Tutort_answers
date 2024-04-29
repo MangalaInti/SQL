@@ -22,7 +22,9 @@ select Score, dense_rank() over(order by Score desc) as 'Rank' from Scores
 
 --Q#5 Consecutive Numbers
 
-
+select distinct a.num as consecutive_num 
+from logs a join logs b on  a.num = b.num and a.id = b.id-1
+join logs c on  b.num = c.num and b.id = c.id-1 
 
 
 --Q#6 Employees earning more than their managers
