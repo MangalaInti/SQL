@@ -82,6 +82,28 @@ ON p2.Email = p1.Email WHERE p2.Id > p1.Id;
 
 --Q#12 Raising Temperature
 
+WITH cte AS (
+  SELECT 
+    id,
+    recordDate,
+    temperature,
+    LAG(temperature) OVER (ORDER BY recordDate) AS prev_temp
+  FROM 
+    TemperatureRecords
+)
+SELECT 
+  id, 
+  recordDate, 
+  temperature, 
+  prev_temp 
+FROM 
+  cte 
+WHERE 
+  temperature > prev_temp;
+
+OR
+
+
 WITH rising_temp AS (
     SELECT
         id,
