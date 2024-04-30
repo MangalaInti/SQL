@@ -52,7 +52,7 @@ WHERE o.customerId IS NULL;
 --Q#9 - Department with Highest Salary
 Write a sql query to find employees  who have highest salary in each of the department
 
-SELECT Department.Name AS Department, Employee.Name AS Employee, Max(Salary) OVER (PARTITION BY Department ORDER BY Salary) AS Salary
+SELECT Department.Name AS Department, Employee.Name AS Employee, Max(Salary) OVER (PARTITION BY Department ORDER BY Salary) AS Salary 
 FROM Employee JOIN Department ON Employee.DepartmentId = Department.Id
 
 --Q#10 Department Top Three salaries
