@@ -125,7 +125,20 @@ OR
 
 select t.id from weather t, weather y where datediff(t.recorddate, y.recorddate) =1  and t.temperature > y.temperture
 
---Q#13  Trips and Users
+--Q#13  ****Trips and Users
+
+Select  request_at, 
+round(sum(case when status != 'completed' then 1.00 else 0 end)/count(*),2) as cancellation_rate
+from trips t 
+where  
+client_id not in (
+select users_id from users where banned = 'Yes') 
+and
+driver_id not in(
+ select users_id from users where banned = 'Yes'   
+)
+group by request_at
+order by request_at	
 
 --Q#14 Find customer referee
 
@@ -133,9 +146,12 @@ SELECT name FROM Customer WHERE referee_id != 2 OR referee_id IS NULL;
 
 --Q#15 Customer placing the largest number of orders
 
-select customer_number from orders  
-group by 1
+select customer_number from orders  group by 1
 order by count(distinct order_number) desc limit 1;
+ OR
+Select customer_number from orders group by customer_number 
+order by sum(order_number) desc  limit 1	 
+	 
 
 --Q#16 Big Countries
 
@@ -150,8 +166,26 @@ WHERE
 --Q#17 Classes more than 5 students
 select `class` from `courses` group by `class` having count(distinct `student`) >= 5
 
---Q#18 Human Traffic of Stadium
+--Q#18 **** Human Traffic of Stadium
+WITH CTE AS (
+    SELECT id,
+    visit_date,
+    people,
+    id - ROW_NUMBER() OVER(ORDER BY id) AS consecutive
+    FROM Stadium
+    WHERE people >= 100
+)
 
+SELECT id, visit_date, people
+FROM CTE
+WHERE consecutive IN (
+    SELECT consecutive
+    FROM CTE
+    GROUP BY consecutive
+    HAVING COUNT(id) >= 3
+)
+
+	 OR
 with filtered_data as (
 select id, 
        visit_date, 
