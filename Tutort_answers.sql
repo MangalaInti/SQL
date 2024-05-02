@@ -282,7 +282,7 @@ FROM ActorDirector
 GROUP BY actor_id, director_id
 HAVING COUNT(*) >= 3
 
---Q#24 Sales Analysis III
+--Q#24 ***Sales Analysis III
 
 select s.product_id, p.product_name
 
@@ -297,7 +297,15 @@ having min(s.sale_date) >= '2019-01-01'
 	
 
 OR
-
+SELECT P.product_id, P.product_name
+FROM Sales AS S
+RIGHT JOIN Product AS P
+ON S.product_id = P.product_id
+GROUP BY P.product_id, P.product_name
+HAVING MAX(sale_date) BETWEEN '2019-01-01' AND '2019-03-31'
+      AND MIN(sale_date) BETWEEN '2019-01-01' AND '2019-03-31'
+OR
+	
 select distinct s.product_id, p.product_name
 from sales s join product p 
 on s.product_id=p.product_id
