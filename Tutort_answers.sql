@@ -1,3 +1,4 @@
+
 --Q#1 Combine two tables
 Write a sql query to report name and address of each person in persons table. If the address of a person is not present in address table, 
 report null instead
@@ -236,7 +237,26 @@ select * from cinema
 where mod(id,2) <> 0 and description != 'boring'
 order by rating desc
 
---Q#21 Exchange Seats
+--Q#21 *** Exchange Seats
+
+--Using IF Stmt
+select 
+    if( id%2 <> 0, if( id = ( select max(id) from seat ), id, id+1), id-1 ) as id, 
+student 
+from seat 
+order by id
+
+--Using CASE stmt
+select 
+    case 
+        when id=(select max(id) from seat) and id%2 <> 0 then id
+        when id%2 = 0 then id-1
+        when id%2 <> 0 then id+1
+    end as id, student 
+from seat 
+order by id
+
+--Another case
 
 SELECT ( CASE
             WHEN id%2 != 0 AND id != counts THEN id+1
@@ -255,7 +275,7 @@ update Salary
                else 'm'
                end)
 
---Q#23 Cooperated At Least Three Times
+--Q#23 ***Cooperated At Least Three Times
 
 SELECT actor_id, director_id
 FROM ActorDirector
