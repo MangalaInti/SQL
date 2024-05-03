@@ -357,6 +357,21 @@ where
     activity_date <= '2019-07-27'
 GROUP BY activity_date
 
+	OR
+select activity_date as day, count(distinct user_id) as active_users from activity
+where activity_date   between '2019-07-27'::date  - interval  '30 days'
+and '2019-07-27'::date
+group by 1
+	OR
+-- Write your PostgreSQL query statement below
+-- period from 2019-06-27 until 2019-07-27
+select activity_date as day,
+count(distinct user_id) as active_users
+from Activity
+where activity_date > '2019-07-27'::timestamp - INTERVAL '30 days'
+and activity_date <= '2019-07-27'::timestamp
+group by activity_date	
+
 
 --Q#28 Article Views I
 
@@ -365,20 +380,12 @@ from Views
 where author_id = viewer_id
 order by author_id asc
 
---Q#29 Market Analysis I
+--Q#29 ***Market Analysis I
 
-SELECT U.user_id AS buyer_id
-       ,U.join_date
-       ,count(O.order_id) AS orders_in_2019
-FROM Users AS U
-
-LEFT JOIN Orders O ON U.user_id = O.buyer_id
-    AND O.order_date LIKE '%2019%'
-
-GROUP BY U.user_id
-        ,U.join_date
-        
-ORDER BY U.user_id
+select user_id as buyer_id, join_date, COUNT(order_id) as orders_in_2019 
+from Users LEFT JOIN Orders on user_id = buyer_id 
+and  extract(year from order_date) = 2019 
+group by user_id, join_date
 
 Q#30 Reformat Department Table
 
