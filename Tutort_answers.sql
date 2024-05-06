@@ -407,7 +407,7 @@ group by id
 order by id
 
 
-Q#31 Capital Gain/Loss
+Q#31** Capital Gain/Loss
 
 SELECT
     stock_name,
@@ -421,6 +421,15 @@ FROM Stocks
 GROUP BY 1
 ) x
 ORDER BY 1
+
+	OR
+-- Write your PostgreSQL query statement below
+select 
+       stock_name,  
+       sum(case when operation = 'Sell' then price else NULL end )- sum(case when operation = 'Buy' then price else NULL end) as capital_gain_loss
+       from Stocks 
+       group by stock_name ; 	
+	
 
 --Q#32 Top Travellers
 
