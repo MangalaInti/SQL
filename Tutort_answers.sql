@@ -511,7 +511,7 @@ WHERE  low_fats = 'Y'
        AND recyclable = 'Y'
 ORDER  BY NULL;
 
---Q42 Rearrange the Products Table
+--Q42*** Rearrange the Products Table
 
 
 SELECT product_id, 'store1' AS store, store1 AS price FROM Products WHERE store1 IS NOT NULL
@@ -537,7 +537,7 @@ where time_stamp LIKE '2020%'
 group by user_id 
 order by user_id;
 
---Q45 Employees with Missing Information
+--Q45 *** Employees with Missing Information
 
 Select e.employee_id from Employees e 
 LEFT JOIN Salaries s 
