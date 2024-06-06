@@ -282,7 +282,7 @@ FROM ActorDirector
 GROUP BY actor_id, director_id
 HAVING COUNT(*) >= 3
 
---Q#24 ***Sales Analysis III
+--Q#25 ***Sales Analysis III
 
 select s.product_id, p.product_name
 
