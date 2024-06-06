@@ -5,4 +5,6 @@
 #Any consecutive problem i.e comparing 1 row with another row. First approach is self join
 # Solve a cummulative problem in a sql - TechTFQ	REAL SQL Interview PROBLEM by Capgemini
  (Sum() over(partition order by)
+ 
+#If want to get consecutive records from table then use Row_number i.e id -row_number(order by id)
 
