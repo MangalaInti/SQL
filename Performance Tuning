@@ -23,3 +23,9 @@ Partitioning: Partitioning large tables into smaller, more manageable segments c
     d. Join index though the statics on base table
     f. Partitioning columns
 
+Index increases the performance Select statements
+Index for Primary keys are automatically created
+Indexes are generally created on columns that are frequently used in WHERE clause
+Indexes are also used to enforce integrity constraints like Primary Key and Unique constraints
+An table can have one clustered index and any number of non clustered indexes
+
