@@ -7,4 +7,5 @@
  (Sum() over(partition order by)
  
 #If want to get consecutive records from table then use Row_number i.e id -row_number(order by id)
+#if you want to find the highest number of users - 1st find  max(users_count) and select user from table user_count = 
 
