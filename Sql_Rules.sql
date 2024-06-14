@@ -9,3 +9,8 @@
 #If want to get consecutive records from table then use Row_number i.e id -row_number(order by id)
 #if you want to find the highest number of users - 1st find  max(users_count) and select user from table user_count = 
 
+# To find percentages - 
+   select sum(case when is_low_fat = 'Y' and is_recyclable = 'Y' then 1 end) 
+   /count(*) ::float *100 as percentage
+   from facebook_products
+
