@@ -48,6 +48,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+To call this stored procedure and update an employee's salary, use the following SQL statement:
+    SELECT update_employee_salary(1, 75000);
+
 3. SELECT
     p.prod_id,
     p.prod_name,
