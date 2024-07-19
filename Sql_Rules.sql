@@ -14,3 +14,7 @@
    /count(*) ::float *100 as percentage
    from facebook_products
 
+ # Increase the salary by 10% 
+   select salary * 1.10 from emp 
+ if its 50% then 1.50
+
