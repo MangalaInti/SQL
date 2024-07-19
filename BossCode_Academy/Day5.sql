@@ -1,6 +1,6 @@
 --DAY5
 1. UPDATE employees SET sal = sal * 1.10;
-2. 
+2. ***
 -- Step 1: Delete associated order items
 DELETE FROM order_items oi join  orders o
  oi.order_id = o.order_id
@@ -10,7 +10,7 @@ AND o.order_dt < NOW() - INTERVAL '1 year';
 DELETE FROM orders
 WHERE order_dt < NOW() - INTERVAL '1 year';
 
-3. 
+3. ***
 
 BEGIN;
 
@@ -32,7 +32,7 @@ WHERE price BETWEEN 50 AND 100;
 5. DELETE FROM reviews WHERE rating < 3;
 
 
-6. 
+6. ***
 DO $$
 DECLARE
     new_cust_id INTEGER;
@@ -58,13 +58,19 @@ END $$;
 
 7. UPDATE employees SET sal = sal * 1.15 WHERE dept = 'Sales';
 
-8. DELETE FROM products
+8. *** 
+ DELETE FROM products
 WHERE prod_id NOT IN (
     SELECT DISTINCT prod_id 
     FROM order_items
 );
+ --OR 
+ DELETE FROM products p
+USING products p
+LEFT JOIN order_items oi ON p.prod_id = oi.prod_id
+WHERE oi.prod_id IS NULL;
 
-9. 
+9. ***
 DO $$
 DECLARE
     new_supplier_id INTEGER;
@@ -92,7 +98,7 @@ EXCEPTION
         RAISE NOTICE 'An error occurred, and the transaction has been rolled back.';
 END $$;
 
-10. 
+10. ***
 
 UPDATE orders
 SET order_dt = CASE
