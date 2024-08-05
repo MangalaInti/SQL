@@ -18,3 +18,7 @@
    select salary * 1.10 from emp 
  if its 50% then 1.50
 
+ # To find median
+ select percentile_cont(0.5) within group (order by sat_writing) as median
+from sat_scores)
+
