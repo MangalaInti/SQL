@@ -22,3 +22,6 @@
  select percentile_cont(0.5) within group (order by sat_writing) as median
 from sat_scores)
 
+# To find percentages
+SELECT SUM(order_amt) FROM orders)) /100*0.1) 
+
