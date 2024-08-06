@@ -1,5 +1,0 @@
-VIEW AND TEMPORARY TABLES AREN'T THE SAME!
-
-Some of the differences between views and temporary tables in SQL are:
-1. Views exist in the database until they are dropped. But, temporary tables exist until the session/transaction has ended.
-2. Views can help to simplify complex queries and hide the complexity from the end-user. They can also be used to restrict access to specific rows or columns of a table. But, temporary tables have no such inherent security features.
