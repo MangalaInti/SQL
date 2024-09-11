@@ -1,0 +1,28 @@
+What's wrong with this query?
+
+
+The initial query is functionally correct; it will compile and even work in a small set, but as soon as your data grows, it will let you down.
+
+Using the YEAR() function in the WHERE clause can have two significant drawbacks:
+
+𝟭. 𝗣𝗲𝗿𝗳𝗼𝗿𝗺𝗮𝗻𝗰𝗲 𝗜𝗺𝗽𝗮𝗰𝘁 𝗗𝘂𝗲 𝘁𝗼 𝗙𝘂𝗹𝗹 𝗧𝗮𝗯𝗹𝗲 𝗦𝗰𝗮𝗻
+
+When the YEAR() function is applied to s.SaleDate, SQL needs to evaluate this function for every row in the table.
+ 
+This often results in a full table scan, where every row is checked against the condition. That will hurt, especially for tables with millions of rows.
+
+𝟮. 𝗜𝗻𝗲𝗳𝗳𝗲𝗰𝘁𝗶𝘃𝗲 𝗜𝗻𝗱𝗲𝘅 𝗨𝘀𝗲
+
+The function YEAR(s.SaleDate) prevents the query optimizer from using any indexes on the SaleDate column.
+ 
+Indexes help the database quickly locate and filter the relevant rows, but they cannot be used when the column is wrapped inside a function.
+ 
+As a result, the query's performance suffers because the database is unable to take advantage of the available indexing.
+
+𝗔 𝗕𝗲𝘁𝘁𝗲𝗿 𝗔𝗽𝗽𝗿𝗼𝗮𝗰𝗵
+
+Use a range-based query that allows the database to utilize indexes effectively. 
+
+The BETWEEN clause filters records by defining a range of dates (2024-01-01 to 2024-12-31).
+
+The query optimizer will use any index on the SaleDate column to locate the relevant rows without scanning the entire table.
