@@ -1,0 +1,28 @@
+For each join type, provide the number of rows in the resulting joined table and explain your reasoning.
+
+TableA TableB
+1 1
+1 1
+1 1
+Null Null
+1 0
+0 Null
+
+1) Right Join
+2) Left Join
+3) Inner Join
+4) Outer Join
+
+--Solution
+Joins work on matching keys. Each key is cross joined on each match(one to many) in duplicate keys. 
+Inner Join: 
+1 - 4*3 + 0-1*1 + Null(0) - not considered = 13
+
+Left Join:
+Inner join + Null(=1 instance in A) = 14
+
+Right Join:
+Inner join + Null(=2 instance in B) = 15
+
+Outer Join: 
+Inner join + Null(=1 instance in A + 2 in B) = 16
