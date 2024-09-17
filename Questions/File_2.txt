@@ -1,0 +1,10 @@
+--Given a table, fetch all rows where any of the columns contain a NULL value, but without using the OR operator.
+.
+SELECT * 
+FROM Table
+WHERE COALESCE(column 1, column 2, column 3) IS NULL;
+
+Explanation:
+
+COALESCE returns the first non-NULL value among the provided columns. If all columns are NULL, it returns NULL.
+The WHERE clause then selects the rows where all values in the column list are NULL.
