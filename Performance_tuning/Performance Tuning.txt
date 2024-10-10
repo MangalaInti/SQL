@@ -1,0 +1,31 @@
+--Performance Tuning Guidelines
+
+--Indexing - Proper indexing tables can increase the query performance
+ Indexes can be created on columns frequently used in WHERE clauses, JOIN  conditions, and ORDER BY clauses.
+--minimizing the use of wildcard characters in LIKE clauses, avoiding unnecessary subqueries, and using appropriate JOIN types.
+
+Partitioning: Partitioning large tables into smaller, more manageable segments can improve query performance
+
+1. Usage of proper data types -
+2. Compatiability of column data types used in joins
+3. No unnessary ORDER BY clause
+4. Efficient handling of spool space
+5. Correct definision of primary index
+6. Updating Vs Delete-Insert for larget tables
+7. Dropping of temporary and volatile tables if they are no longer needed
+8. The first step in performance tuning is the use of EXPLAIN plan on the    query
+9.Explain plan gives the details of how optimizer will execute the query
+10. COLLECT STATISTICS command is used to collect data demographics of the
+    table. Collect stats on
+    a. Columns that are used in WHERE clause
+    b. Columns used in the joining condition
+    c. Unique PI column
+    d. Join index though the statics on base table
+    f. Partitioning columns
+
+Index increases the performance Select statements
+Index for Primary keys are automatically created
+Indexes are generally created on columns that are frequently used in WHERE clause
+Indexes are also used to enforce integrity constraints like Primary Key and Unique constraints
+An table can have one clustered index and any number of non clustered indexes
+
