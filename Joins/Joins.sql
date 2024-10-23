@@ -1,3 +1,13 @@
+-- Formula for outer joins:
+Inner join = matching records from both the tables
+Left join = inner join + fetch any additional records from left table which is not present in right table.
+
+Right join = inner join + fetches any records from right table which is not present in left table.
+
+Full join = inner join
+                + fetch additional records from left table which is not present in right table
+                + fetch additional records from right table which is not present in left table.
+
 1. Inner Join
 Definition: Returns records that have matching values in both tables.
   
