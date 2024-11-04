@@ -15,7 +15,7 @@
    FROM CUSTOMER C JOIN ORDERS O
    ON C.CUSTOMER_ID = O.CUSTOMER_ID) WHERE RN<=5
 
- 2. SELECT C.CUSTOMER_NAME FROM CUSTOMERS C JOIN ORDERS O
+ 2.* SELECT C.CUSTOMER_NAME FROM CUSTOMERS C JOIN ORDERS O
     ON C.CUST_ID=O.CUST_ID
     WHERE O.ORDER_DATE>= NOW() - INTERVAL '30 days'   
 
@@ -46,7 +46,7 @@ FROM products p
 LEFT JOIN order_details od ON p.prod_id = od.prod_id
 WHERE od.prod_id IS NULL;
 
-8. SELECT DISTINCT c.cust_name
+8.* SELECT DISTINCT c.cust_name
 FROM customer c
 JOIN orders o ON c.cust_id = o.cust_id
 WHERE EXTRACT(DOW FROM o.order_dt) IN (0, 6);
@@ -58,7 +58,7 @@ GROUP BY EXTRACT(MONTH FROM order_dt)
 ORDER BY month;
 
 
-10. SELECT c.cust_id, c.cust_name, c.city
+10.* SELECT c.cust_id, c.cust_name, c.city
 FROM customer c
 JOIN orders o ON c.cust_id = o.cust_id
 JOIN order_details od ON o.order_id = od.order_id
