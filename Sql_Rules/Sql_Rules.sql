@@ -3,6 +3,13 @@
 # Convert rows to columns use case statement
 # Convert column to rows use union e.g - Rearrange Products Table
 #Any consecutive problem i.e comparing 1 row with another row. First approach is self join
+ # Cummulative problem - sum() over(order by column)
+ --Method -I
+   select person_name,weight,turn, sum(weight) over(order by turn ) total_wt from queue
+ --Method II
+  select person_name,weight,turn,
+sum(weight) over(order by turn ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) total_wt from queue
+ 
 # Solve a cummulative problem in a sql - TechTFQ	REAL SQL Interview PROBLEM by Capgemini
  (Sum() over(partition order by)
  
