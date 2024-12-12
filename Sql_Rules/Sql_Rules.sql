@@ -1,8 +1,29 @@
 # Wherever you are given a range, keep MIN() and MAX() in mind
 # When you want to find first_login use min function
 # Convert rows to columns use case statement
-# Convert column to rows use union e.g - Rearrange Products Table
+# Convert column to rows use union e.g - Rearrange  Products Table
 #Any consecutive problem i.e comparing 1 row with another row. First approach is self join
+#Consecutive problem - Find all numbers that appear at least three times consecutively.
+ Logs table:
++----+-----+
+| id | num |
++----+-----+
+| 1  | 1   |
+| 2  | 1   |
+| 3  | 1   |
+| 4  | 2   |
+
+ SELECT 
+	DISTINCT Num AS ConsecutiveNums
+FROM (
+    SELECT 
+        Num,
+        LEAD(Num, 1) OVER (ORDER BY id) AS NextNum1,
+        LEAD(Num, 2) OVER (ORDER BY id) AS NextNum2
+    FROM Logs
+) subquery
+WHERE Num = NextNum1 AND Num = NextNum2;
+ 
  # Cummulative problem - sum() over(order by column)
  --Method -I
    select person_name,weight,turn, sum(weight) over(order by turn ) total_wt from queue
