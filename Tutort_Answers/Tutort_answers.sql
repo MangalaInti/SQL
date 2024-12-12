@@ -22,6 +22,13 @@ SELECT salary, dense_rank() over(order by salary desc) rn from emp ) e where rn 
 select Score, dense_rank() over(order by Score desc) as 'Rank' from Scores
 
 --Q#5 Consecutive Numbers
+select distinct num as consecutivenum from (
+select num,
+lead(num,1) over() num1,
+lead(num,2) over() num2
+from logs) a where num = num1 and num = num2
+	
+--alternate solution	
 
 select distinct a.num as consecutive_num 
 from logs a join logs b on  a.num = b.num and a.id = b.id-1
