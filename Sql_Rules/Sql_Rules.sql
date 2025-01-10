@@ -23,6 +23,15 @@ FROM (
     FROM Logs
 ) subquery
 WHERE Num = NextNum1 AND Num = NextNum2;
+
+---Slight modification
+with cte as (
+select *,
+lead(num,0) over(order by id) next1,
+lead(num,1) over(order by id) next2,
+lead(num,2) over(order by id) next3         
+from public.logs)
+select num from cte where next1 = next2 and next1 = next3
  
  # Cummulative problem - sum() over(order by column)
  --Method -I
