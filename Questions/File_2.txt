@@ -8,3 +8,8 @@ Explanation:
 
 COALESCE returns the first non-NULL value among the provided columns. If all columns are NULL, it returns NULL.
 The WHERE clause then selects the rows where all values in the column list are NULL.
+
+--weather table from posgres
+with cte as(
+select *, lag(temp) over(order by recorddt) as prev from public.weather)
+select id from cte where temp > prev
