@@ -26,3 +26,7 @@ Use a range-based query that allows the database to utilize indexes effectively.
 The BETWEEN clause filters records by defining a range of dates (2024-01-01 to 2024-12-31).
 
 The query optimizer will use any index on the SaleDate column to locate the relevant rows without scanning the entire table.
+
+--Regularly update STATISTICS
+Update STATISTICS employees;
+Partition the large tables
