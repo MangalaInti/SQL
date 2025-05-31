@@ -1,0 +1,112 @@
+
+--SQL
+--CASE STMT
+If the expected output is multiple columns like (low_risk, Medium_risk, High_risk) => 
+case when then else  end as,
+case when then else  end as,
+
+If the expected output is multiple rows like (
+low_risk, 
+Medium_risk, 
+High_risk) => 
+
+case 
+when then 
+when then 
+else
+end as 
+
+--STRING_AGG
+The string_agg() function in SQL is used to concatenate values from multiple rows into a single string, 
+with an optional delimiter between the values.
+
+string_agg(expression, delimiter)
+
+Example : 
+         Fruits
+         Apple
+         banana
+         cherry 
+		 
+Output:		 
+SELECT string_agg(fruit_name, ', ') AS all_fruits
+FROM fruits;
+		 
+All_fruits : apple, banana, cherry		 
+
+--UNNEST(STRING_TO_ARRAY)
+unnest function in SQL is commonly used with arrays to convert an array into a set of rows.
+You can split a string into an array and then "unnest" it into individual rows.
+
+Example : SELECT unnest(string_to_array('apple,banana,cherry', ',')) AS fruit;
+Output : Fruits
+         Apple
+         banana
+         cherry 		 
+
+--Some Functions
+
+1. Revenue = Quantity * price
+2. To calculate the percentage multiply by 100.0 ( count(active_user)*100.0 /count(*))
+
+3. if there is no percentage calculation and there is division involved try to use float or decimal 
+    e.g (coalesce(termination_date, '2021-05-01') - hire_date)::float/365 as years_spent
+	
+
+3. When we want perform percentage calculation use CASE stmt
+   sum(case when status_of_order!= 'Completed' then number_of_orders
+   end)*100.00 /sum(number_of_orders)as percentage_incomplete_orders, 	
+	
+	
+4. SUM(cost_in_dollars * units_sold) AS total_sales
+5. mean is average()
+6. Median is percentile_cont(0.05) within group()
+   e.g Find the median age of gold medal winners across all Olympics.
+    select percentile_cont(0.5) within group(order by age) rk
+      from olympics_athletes_events where medal='Gold'
+7. Mode is frequently or most occured value	  
+
+
+8. Profit = Selling_price - cost_price
+          = SalesAmount - CostAmount
+   Profit = Revenue - cost
+	  
+
+
+--Date Functions in Postgres
+
+1. To extract month and year from date
+ To_char(order_date, 'YYYY-MM') 
+
+2. To extract weekdays (Mon to Fri)
+Extract day - which gives 1 -Mon, 2-Tue, 3-Wed
+Extract DOW from Order_date between 1 and 5 
+
+3. To extract Date
+
+order_timestamp_utc::date = '2019-03-11'
+
+4. To get Quarter
+extract(Quarter from date_column)
+
+--Addtional Dates functions
+
+Last 12 months last_service_dt < current_dt - interval '12 months'
+
+5. period of 30 days ending 2019-07-27 inclusively.
+where activity_date between DATE '2019-07-27' - interval '29 days' and DATE '2019-07-27'
+  
+
+
+--SQL Optimization
+1. Avoid using DISTINCT when its not necessary. Distinct operation can be computationally expensive, 
+  especially on large datasets.
+2. Avoid using ORDER BY in until final SELECT stmt. Your subqueries and CTE's typically don't need to be ordered.
+3. Use UNION ALL instead UNION when you are ok with duplication of rows
+4. SELECT only spedific columns that you need.
+5. Filter on index key  where possible 
+6. minimize the use of OR conditions . Using OR can lead to full table scan which can be inefficient.
+7. Don't use functions in WHERE clauses, because it can interfere with the indexes
+8. Use CTE or SUBQUERY to filter and reduce  the size of your tables before JOINS
+9. Filter conditions in the ON vs. WHERE clause typically more efficient.   
+
