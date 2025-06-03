@@ -7,7 +7,7 @@ Some of the differences between views and temporary tables in SQL are:
 --SQL
 What’s the difference between COUNT(column) and COUNT(DISTINCT
 column)?
-COUNT(column) will return the number of non-NULL values in that column. COUNT(DISTINCT
+COUNT(column) will return the number of NULL values in that column. COUNT(DISTINCT
 column) will return the number of unique non-NULL values in that column.
 
 What’s the difference between COUNT(column) and COUNT(DISTINCT
