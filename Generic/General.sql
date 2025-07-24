@@ -37,3 +37,21 @@ character.
 What’s the difference between ANY and ALL?
 The ANY keyword checks that a value meets at least one of the conditions in the following set of
 values. The ALL keyword checks that a value meets all of the conditions in the following set of values
+
+ Difference between Group BY and Partition BY
+Group BY is used to aggregate functions like SUM, MIN, MAX etc
+it results 1 row per group
+e.g - Find the average marks for each subject
+
+select subject, avg(marks) from students
+group by subject
+
+Partition BY is a window function, used to perform calculations 
+Does NOT collapse rows; instead, it calculates values within each partition while still keeping all rows.
+In partition by we use functions like - Rank(), Row_number() etc
+
+e.g  Student who scored highest marks in each subject
+     select student, subject, marks from (
+     select student, subject, marks, 
+     rank() over(partition by subject order by marks desc) rn
+     from students) where rn =1 
