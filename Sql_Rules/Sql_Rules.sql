@@ -23,6 +23,22 @@ FROM (
     FROM Logs
 ) subquery
 WHERE Num = NextNum1 AND Num = NextNum2;
+--Method II
+
+SELECT
+    seat_id
+FROM
+    (SELECT
+        seat_id,
+        free,
+        LAG(free, 1) OVER (ORDER BY seat_id) AS prev_free,
+        LEAD(free, 1) OVER (ORDER BY seat_id) AS next_free
+    FROM
+        Cinema) AS SubqueryAlias
+WHERE
+    (free = 1 AND prev_free = 1) OR (free = 1 AND next_free = 1)
+ORDER BY
+    seat_id;
 
 ---Slight modification
 with cte as (
